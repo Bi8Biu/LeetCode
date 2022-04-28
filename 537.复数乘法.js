@@ -23,8 +23,5 @@ var complexNumberMultiply = function (num1, num2) {
     const i = num1Arr[0] * num2Arr[1] + num1Arr[1] * num2Arr[0] + 'i';
     return a + b + '+' + i
 };
-
-const a = complexNumberMultiply("1+-1i", "0+0i");
-console.log(a);
 // @lc code=end
 
