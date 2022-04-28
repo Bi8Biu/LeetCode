@@ -16,14 +16,20 @@
 //     }
 //     return false
 // };
+
 // hash map 解法
+// var containsDuplicate = function (nums) {
+//     const map = new Map();
+//     for (const val of nums) {
+//         if (map.has(val)) return true
+//         map.set(val, 1);
+//     }
+//     return false
+// };
+
+// set 解法
 var containsDuplicate = function (nums) {
-    const map = new Map();
-    for (const val of nums) {
-        if (map.has(val)) return true
-        map.set(val, 1);
-    }
-    return false
+    return (new Set(nums).size !== nums.length)
 };
 // @lc code=end
 
