@@ -10,17 +10,21 @@
  * @param {number} amount
  * @return {number}
  */
+const map = new Map();
 var coinChange = function (coins, amount) {
-    if (amount === 0) return 0;
-    if (amount <= 0) return -1;
-    let res = Infinity;
-    for (const coin of coins) {
-        const sum = coinChange(coins, amount - coin);
-        if (sum === -1) continue;
-        res = Math.min(res, sum + 1)
+    const map = new Map();
+    map.set(0, 0);
+    // n 要凑的钱
+    for (let n = 1; n <= amount; n++) {
+        map.set(n, Infinity);
+        for (const coin of coins) {
+            // 需要凑的钱 小于 硬币面额 跳过该硬币
+            if (n < coin) continue;
+            const sum = Math.min(map.get(n), map.get(n - coin) + 1);
+            map.set(n, sum);
+        }
     }
-    return res === Infinity ? -1 : res;
+    return map.get(amount) === Infinity ? -1 : map.get(amount);
 };
-console.log(coinChange([1, 2, 5], 11))
 // @lc code=end
 
