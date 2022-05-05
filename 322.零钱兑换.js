@@ -12,19 +12,18 @@
  */
 const map = new Map();
 var coinChange = function (coins, amount) {
-    const map = new Map();
-    map.set(0, 0);
+    const arr = new Array(amount + 1);
+    arr.fill(Infinity);
+    arr[0] = 0;
     // n 要凑的钱
-    for (let n = 1; n <= amount; n++) {
-        map.set(n, Infinity);
+    for (let n = 1; n < arr.length; n++) {
         for (const coin of coins) {
             // 需要凑的钱 小于 硬币面额 跳过该硬币
             if (n < coin) continue;
-            const sum = Math.min(map.get(n), map.get(n - coin) + 1);
-            map.set(n, sum);
+            arr[n] = Math.min(arr[n], arr[n - coin] + 1)
         }
     }
-    return map.get(amount) === Infinity ? -1 : map.get(amount);
+    return arr[amount] === Infinity ? -1 : arr[amount];
 };
 // @lc code=end
 
